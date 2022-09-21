@@ -1,32 +1,46 @@
+const { validationResult } = require("express-validator");
+
 module.exports = {
     home: (req, res) => {
-
-        res.render('index')
-
-    }, about: (req, res) => {
-
-        res.render('about')
-
+        return res.render('index');
     },
-    contact: (req, res) => {
-
-        res.render('contact')
-
+    exit: (req, res) => {
+        res.locals.usuario = req.session.usuario
+        res.render('exit', { userName: req.session.userName })
     },
-    services: (req, res) => {
 
-        res.render('services')
+
+
+    form: (req, res) => {
+
+
+        let errors = validationResult(req);
+
+        if (errors.isEmpty()) {
+            const { name, color, email, age } = req.body
+
+            req.session.usuario = color
+            res.locals.usuario = color
+            req.session.userName = name
+
+
+            if (req.body.remember !== undefined) {
+                res.cookie('color', color, { maxAge: 60 * 1000 })
+            }
+            res.render('index', { name, color, email, age })
+        } else {
+
+            res.render('index', { errors: errors.mapped(), old: req.body })
+        }
     },
-    admin: (req, res) => {
 
-        res.render('admin', {
-            user: req.query.user
-        })
+
+
+
+    destroy: (req, res) => {
+        req.session.destroy();
+        res.cookie('color', null, { maxAge: -1 })
+        res.redirect("/");
     },
-    login: (req, res) => {
 
-        res.render('login', {
-            error: req.query.error ? 'No tienes los privilegios para ingresar' : null
-        })
-    }
-}
+};

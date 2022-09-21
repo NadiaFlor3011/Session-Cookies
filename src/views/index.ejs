@@ -1,14 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/css/app.css" />
-  </head>
-  <body>
-    <%- include( './partials/header') %>
-    <h1>Home Page</h1>
-    <img src="/images/node.jpg" width="60%" />
-  </body>
-</html>
+<%- include('./partials/head',{ title :' Register' }) %>
+
+    <body style="background-color: <%= locals.usuario  ? usuario : null %>;" >
+
+      
+
+            <main class="register__main">
+                <% if (locals.name) { %>
+                    <form action="" class="form__register">
+                    <h1>
+                        Hola <%= name %>
+                    </h1>
+                    <h1>
+                        Elegiste el color: <%= color %>
+                    </h1>
+                    <h1> 
+                        Tu email es: <%= email %>
+                    </h1>
+                    <h1>
+                        Tu edad es:<%= age %>
+                    </h1>
+
+                    <button><a href="/exit">Salir</a></button>
+                </form>
+
+                    <% } else { %>
+
+                        <form action="" class="form__register" method="POST">
+                        
+                          
+                            <div class="form__register-container">
+
+                                <div class="form__register-group">
+                                    <input type="text" id="name" class="form__register-input" name="name"
+                                        placeholder=" "  value="<%= locals.old && old.email ? old.email : null %>">
+                                    <label for="name" class="form__register-label">Ingrese su nombre :</label>
+                                    <small>
+                                        <%= locals.errors && errors.name ? errors.name.msg : null %>
+                                    </small>
+
+                                </div>
+                                <div class="form__register-group">
+                                    <select class="form__select" name="color" id="color">
+                                        <option value="" hidden selected>Seleccione un color...</option>
+                                        <option value="red">Rojo</option>
+                                        <option value="green">Verde</option>
+                                        <option value="yellow">Amarillo</option>
+                                        <option value="pink">Rosa</option>
+                                    </select>
+                                    <small>
+                                        <%= locals.errors && errors.color ? errors.color.msg : null %>
+                                    </small>
+                                </div>
+
+
+                                <div class="form__register-group">
+                                    <input type="email" id="email" name="email" class="form__register-input"
+                                        placeholder=" " value="<%= locals.old && old.email ? old.email : null %>">
+                                    <label for="email" class="form__register-label">Email:</label>
+                                    <small>
+                                        <%= locals.errors && errors.email ? errors.email.msg : null %>
+                                    </small>
+                                </div>
+                                <div class="form__register-group">
+                                    <input type="text" id="age" name="age" class="form__register-input"
+                                        placeholder=" " value="<%= locals.old && old.age ? old.age : null %>">
+                                    <label for="age" class="form__register-label">Ingrese su edad:</label>
+                                    <small>
+                                        <%= locals.errors && errors.age ? errors.age.msg : null %>
+                                    </small>
+                                </div>
+
+                               <div>
+                                <input class="" type="checkbox" name="remember">
+                                <label class="" for="remember">Recordar color</label>
+                               </div>
+                               <div class="">
+                                <button type="submit"><a href="/logout">Olvidar color</a></button>
+                               
+                            </div>
+                                
+                                
+                                <div class="">
+                                    <button type="submit" class="" value="Guardar">Guardar</button>
+                                   
+                                </div>
+
+
+                            </div>
+
+
+                        </form>
+                        <% } %>
+            </main>
+
+            <!-- footer -->
+
+
+
+    </body>
+
+    </html>

@@ -1,16 +1,18 @@
 var express = require('express');
 var router = express.Router();
-const { home, about, contact, services, admin, login } = require('../controllers/mainController');
-const adminCheck = require('../middleware/adminCheck');
+const { home, exit, form, destroy } = require('../controllers/mainController')
+const validator = require('../validations/registerValidator')
+
+
 /* GET home page. */
 
 router
+    .get('/exit', exit)
     .get('/', home)
-    .get('/about', about)
-    .get('/contact', contact)
-    .get('/services', services)
-    .get('/admin', adminCheck, admin)
-    .get('/login', login)
+
+    .post('/', validator, form)
+    .get('/logout', destroy)
+
 
 
 

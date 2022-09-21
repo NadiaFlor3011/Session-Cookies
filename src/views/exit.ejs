@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head',{ title :' Home' }) %>
+  <body style="background-color: <%= locals.usuario ? usuario : null %>;">
+    <main>
+      <div class="form__register">
+        <% if (locals.userName) { %>
+        <h1><%= userName%>, gracias por visitarnos</h1>
+        <% } %>
+      </div>
+    </main>
+  </body>
+</html>
