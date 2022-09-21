@@ -32,7 +32,7 @@
 
                                 <div class="form__register-group">
                                     <input type="text" id="name" class="form__register-input" name="name"
-                                        placeholder=" "  value="<%= locals.old && old.email ? old.email : null %>">
+                                        placeholder=" "  value="<%= locals.old && old.name ? old.name : null %>">
                                     <label for="name" class="form__register-label">Ingrese su nombre :</label>
                                     <small>
                                         <%= locals.errors && errors.name ? errors.name.msg : null %>
